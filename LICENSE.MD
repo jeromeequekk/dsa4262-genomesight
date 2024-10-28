@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) [2024] [genomesight]
+Copyright (c) 2024 genomesight
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 Contributors:
-- [Jiang Ruirong]
-- [Quek Yan Jun, Jerome]
-- [Tan Wan Ting Andy]
-- [Pek Zi Wei, Zenden]
+- Jiang Ruirong
+- Quek Yan Jun, Jerome
+- Tan Wan Ting Andy
+- Pek Zi Wei, Zenden
