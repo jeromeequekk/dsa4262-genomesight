@@ -1,6 +1,7 @@
-# m6A Site Prediction using Autoencoder-XGBoost
+# m6A Site Prediction using Autoencoder-XGBoost [TODO]
 
 ## Purpose
+[TODO]
 This software combines an autoencoder neural network with XGBoost to predict m6A modification sites in RNA sequences using direct RNA sequencing data. The model first uses an autoencoder to learn compressed representations of the nucleotide and signal features, then employs XGBoost for the final classification of modification sites.
 
 ## Getting Started (for Research Gateway Users)
@@ -43,10 +44,70 @@ pip install -r requirements.txt
 mkdir data
 ```
 
+
+### 4. Downloading the data (Optional if you already have your data)
+These commands download from SG-NEx dataset, and copies these data into the `data/` folder
+
+#### 1. Either from `xpore`
+```bash
+# A549: lung carcinoma epithelial cell line
+aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/xpore/SGNex_A549_directRNA_replicate5_run1/data.json data/
+aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/xpore/SGNex_A549_directRNA_replicate6_run1/data.json data/
+
+# Hct116: colon cancer cells
+aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/xpore/SGNex_Hct116_directRNA_replicate3_run1/data.json data/
+aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/xpore/SGNex_Hct116_directRNA_replicate3_run4/data.json data/
+aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/xpore/SGNex_Hct116_directRNA_replicate4_run3/data.json data/
+
+# HepG2: human liver cancer cell line
+aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/xpore/SGNex_HepG2_directRNA_replicate5_run2/data.json data/
+aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/xpore/SGNex_HepG2_directRNA_replicate6_run1/data.json data/
+
+# K562: lymphoblast cells isolated from the bone marrow of a 53-year-old chronic myelogenous leukemia patient
+aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/xpore/SGNex_K562_directRNA_replicate4_run1/data.json data/
+aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/xpore/SGNex_K562_directRNA_replicate5_run1/data.json data/
+aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/xpore/SGNex_K562_directRNA_replicate6_run1/data.json data/
+
+# MCF7: breast cancer cell line isolated in 1970 from a 69-year-old White woman
+aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/xpore/SGNex_MCF7_directRNA_replicate3_run1/data.json data/
+aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/xpore/SGNex_MCF7_directRNA_replicate4_run1/data.json data/
+```
+
+#### 2. Or from `m6Anet`
+```bash
+# A549: lung carcinoma epithelial cell line
+aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/m6Anet/SGNex_A549_directRNA_replicate5_run1/data.json data/
+aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/m6Anet/SGNex_A549_directRNA_replicate6_run1/data.json data/
+
+# Hct116: colon cancer cells
+aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/m6Anet/SGNex_Hct116_directRNA_replicate3_run1/data.json data/
+aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/m6Anet/SGNex_Hct116_directRNA_replicate3_run4/data.json data/
+aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/m6Anet/SGNex_Hct116_directRNA_replicate4_run3/data.json data/
+
+# HepG2: human liver cancer cell line
+aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/m6Anet/SGNex_HepG2_directRNA_replicate5_run2/data.json data/
+aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/m6Anet/SGNex_HepG2_directRNA_replicate6_run1/data.json data/
+
+# K562: lymphoblast cells isolated from the bone marrow of a 53-year-old chronic myelogenous leukemia patient
+aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/m6Anet/SGNex_K562_directRNA_replicate4_run1/data.json data/
+aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/m6Anet/SGNex_K562_directRNA_replicate5_run1/data.json data/
+aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/m6Anet/SGNex_K562_directRNA_replicate6_run1/data.json data/
+
+# MCF7: breast cancer cell line isolated in 1970 from a 69-year-old White woman
+aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/m6Anet/SGNex_MCF7_directRNA_replicate3_run1/data.json data/
+aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/m6Anet/SGNex_MCF7_directRNA_replicate4_run1/data.json data/
+```
+
+Please refer to the following [link](https://github.com/GoekeLab/sg-nex-data/blob/master/docs/AWS_data_access_tutorial.md#processed-data), if you have trouble access or downloading the SG-NEx dataset
+
 ## Running the Software
 
 ### Input Requirements
-[TODO]
+The script expects the input files in the ./data/ directory:
+Either:
+1. Gzipped JSON file containing direct RNA sequencing data
+Or: 
+2. JSON file containing direct RNA sequencing data
 
 ### Execution Commands
 ```bash
@@ -58,10 +119,16 @@ python auto_encoder_xgboost.py
 ```
 
 ### Output
-[TODO]
+The script generates a CSV file containing:
+- transcript_id
+- transcript_position
+- score (prediction probability for m6A modification)
+
 
 ## Interpreting the Output
-[TODO]
+- The output CSV contains prediction scores between 0 and 1
+- Higher scores (closer to 1) indicate higher confidence of m6A modification
+- Scores closer to 0 indicate lower likelihood of modification
 
 ## Script Arguments and Configuration
 [TODO]
