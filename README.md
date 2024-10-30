@@ -1,8 +1,7 @@
-# m6A Site Prediction using Autoencoder-XGBoost [TODO]
+# m6A Site Prediction using XGBoost
 
 ## Purpose
-[TODO]
-This software combines an autoencoder neural network with XGBoost to predict m6A modification sites in RNA sequences using direct RNA sequencing data. The model first uses an autoencoder to learn compressed representations of the nucleotide and signal features, then employs XGBoost for the final classification of modification sites.
+This software uses XGBoost to predict m6A modification sites in RNA sequences using direct RNA sequencing data. The model analyzes both sequence features (7-nucleotide windows) and signal features from direct RNA sequencing to identify potential m6A modifications.
 
 ## Getting Started (for Research Gateway Users)
 
@@ -115,7 +114,7 @@ Or:
 cd dsa4262-genomesight
 
 # Run the script
-python auto_encoder_xgboost.py
+python final_model_xgb_testing.py
 ```
 
 ### Output
@@ -129,9 +128,6 @@ The script generates a CSV file containing:
 - The output CSV contains prediction scores between 0 and 1
 - Higher scores (closer to 1) indicate higher confidence of m6A modification
 - Scores closer to 0 indicate lower likelihood of modification
-
-## Script Arguments and Configuration
-[TODO]
 
 ## Contributors
 * [Jiang Ruirong](https://github.com/ruironggg)
