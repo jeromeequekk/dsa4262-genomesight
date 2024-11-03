@@ -36,7 +36,7 @@ def read_direct_rna_seq_data(data_path):
         print("Reading the data file")
 
     with f:
-        print("Extracting data from the file")
+        print("Extracting features from the data file")
         for line in f:
             line_data = json.loads(line)
             for transcript_id, position_data in line_data.items():
@@ -108,6 +108,7 @@ if __name__ == "__main__":
     ]
     print("Features successfully extracted from the data file!")
 
+    print("Commencing predictions using XGBoost Model")
     best_model = xgb.XGBClassifier()
     best_model.load_model(XGBOOST_MODEL_SAVE_PATH)
     print(f"XGBoost model loaded from {XGBOOST_MODEL_SAVE_PATH}")
@@ -119,4 +120,4 @@ if __name__ == "__main__":
 
     OUTPUT_CSV_PATH = f"predictions_xgboost_{rna_seq_data_file}.csv"
     results_df.to_csv(OUTPUT_CSV_PATH, index=False)
-    print(f"Predictions for the new dataset saved to {OUTPUT_CSV_PATH}")
+    print(f"Predictions for {rna_seq_data_file} have been saved to {OUTPUT_CSV_PATH}")
