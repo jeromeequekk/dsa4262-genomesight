@@ -33,8 +33,10 @@ def read_direct_rna_seq_data(data_path):
         f = gzip.open(data_path, 'rt')
     else:
         f = open(data_path, 'r')
+        print("Reading the data file")
 
     with f:
+        print("Extracting data from the file")
         for line in f:
             line_data = json.loads(line)
             for transcript_id, position_data in line_data.items():
@@ -88,6 +90,7 @@ if __name__ == "__main__":
     else:
         print(f"Using data file: {os.path.basename(rna_seq_data)}")
     rna_seq_data_file = get_filename(rna_seq_data)
+    print(f"Commencing data extraction from {os.path.basename(rna_seq_data)}")
     rna_seq_data_df = read_direct_rna_seq_data(rna_seq_data)
     aggregated_df = rna_seq_data_df.drop(columns=['read_id']).groupby(
         ['transcript_id', 'transcript_position', 'combined_nucleotide',
@@ -95,12 +98,13 @@ if __name__ == "__main__":
         'nucleotide_4_index', 'nucleotide_5_index', 'nucleotide_6_index',
         'nucleotide_7_index']
     ).quantile(0.25).reset_index()
-
+    
     features = aggregated_df[
         ['nucleotide_1_index', 'nucleotide_2_index', 'nucleotide_3_index',
         'nucleotide_4_index', 'nucleotide_5_index', 'nucleotide_6_index',
         'nucleotide_7_index', 'x_1', 'x_2', 'x_3', 'x_4', 'x_5', 'x_6', 'x_7', 'x_8', 'x_9']
     ]
+    print("Features successfully extracted from the data file!")
 
     best_model = xgb.XGBClassifier()
     best_model.load_model(XGBOOST_MODEL_SAVE_PATH)
