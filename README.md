@@ -10,7 +10,7 @@ This software uses XGBoost to predict m6A modification sites in RNA sequences us
    1. **Product Name**: Create a suitable product name
    2. **KeyPair**: Create a pem key if you do not already have one
    3. **EBS Volume Size**: Attach at least 100GB EBS volume
-   4. **Instance Type**: Select t3.large or better instance type
+   4. **Instance Type**: Select t3.xlarge or better instance type
 
 2. Connect to your instance (via SSH):
    1. **Username**: `Ubuntu`
@@ -45,34 +45,8 @@ mkdir data
 
 
 ### 4. Downloading the data (Optional if you already have your data)
-These commands download from SG-NEx dataset, and copies these data into the `data/` folder
+These commands download from SG-NEx dataset, and copies these data into the `data/` folder. You can either download them from `xpore` or the `m6anet` folders. But here are the commands from `m6anet`:
 
-#### 1. Either from `xpore`
-```bash
-# A549: lung carcinoma epithelial cell line
-aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/xpore/SGNex_A549_directRNA_replicate5_run1/data.json data/
-aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/xpore/SGNex_A549_directRNA_replicate6_run1/data.json data/
-
-# Hct116: colon cancer cells
-aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/xpore/SGNex_Hct116_directRNA_replicate3_run1/data.json data/
-aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/xpore/SGNex_Hct116_directRNA_replicate3_run4/data.json data/
-aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/xpore/SGNex_Hct116_directRNA_replicate4_run3/data.json data/
-
-# HepG2: human liver cancer cell line
-aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/xpore/SGNex_HepG2_directRNA_replicate5_run2/data.json data/
-aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/xpore/SGNex_HepG2_directRNA_replicate6_run1/data.json data/
-
-# K562: lymphoblast cells isolated from the bone marrow of a 53-year-old chronic myelogenous leukemia patient
-aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/xpore/SGNex_K562_directRNA_replicate4_run1/data.json data/
-aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/xpore/SGNex_K562_directRNA_replicate5_run1/data.json data/
-aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/xpore/SGNex_K562_directRNA_replicate6_run1/data.json data/
-
-# MCF7: breast cancer cell line isolated in 1970 from a 69-year-old White woman
-aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/xpore/SGNex_MCF7_directRNA_replicate3_run1/data.json data/
-aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/xpore/SGNex_MCF7_directRNA_replicate4_run1/data.json data/
-```
-
-#### 2. Or from `m6Anet`
 ```bash
 # A549: lung carcinoma epithelial cell line
 aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/m6Anet/SGNex_A549_directRNA_replicate5_run1/data.json data/
@@ -110,11 +84,11 @@ Or:
 
 ### Execution Commands
 ```bash
-# Navigate to the project directory
+# Navigate to the project directory, just in case the user is not already in there
 cd dsa4262-genomesight
 
 # Run the script
-python final_model_xgb_testing.py
+python3 final_model_xgb_testing.py
 ```
 
 ### Output

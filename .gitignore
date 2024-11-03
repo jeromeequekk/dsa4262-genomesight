@@ -1,4 +1,6 @@
 data/
+results/
+test/
 .DS_Store
 .vscode/
 __pycache__/
