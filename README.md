@@ -114,7 +114,7 @@ Or:
 cd dsa4262-genomesight
 
 # Run the script
-python final_model_xgb_testing.py
+python3 final_model_xgb_testing.py
 ```
 
 ### Output
