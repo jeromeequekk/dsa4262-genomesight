@@ -42,6 +42,8 @@ def read_direct_rna_seq_data(data_path):
             for transcript_id, position_data in line_data.items():
                 for transcript_position, combined_nucleotides_data in position_data.items():
                     for combined_nucleotide, reads in combined_nucleotides_data.items():
+                        if len(combined_nucleotide) != 7:
+                            print(combined_nucleotide)
                         nucleotide_1, nucleotide_2, nucleotide_3, nucleotide_4, nucleotide_5, nucleotide_6, nucleotide_7 = combined_nucleotide
                         nucleotide_1_idx = convert_nucleotide_to_index(nucleotide_1)
                         nucleotide_2_idx = convert_nucleotide_to_index(nucleotide_2)
